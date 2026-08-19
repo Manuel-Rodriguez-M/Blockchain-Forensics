@@ -59,7 +59,7 @@ Account opened 2026-08-08. Declared at onboarding: software developer, $1,800/mo
 - Staged deposit pattern within a single hour.
 - ~424 fixed-denomination withdrawals rather than a single traceable source.
 - Five-stage route with distinct behavior per stage — quiet during consolidation, staged only at the final deposit.
-- Origin: Tornado Cash (delisted from OFAC's SDN list in March 2025 — the flag here is the fixed-denomination mechanism, not current sanction status).
+- Origin: Tornado Cash.
 
 ### Hypothesis
 
