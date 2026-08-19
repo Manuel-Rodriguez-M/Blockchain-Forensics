@@ -1,0 +1,44 @@
+# Environment
+.env
+.env.local
+*.pyc
+__pycache__/
+
+# Internal planning docs — private per RULES.md / FASE_00 (no publicar reglas,
+# roadmap, auditoria ni documentos de fase en el repositorio publico)
+RULES.md
+docs/ROADMAP_ARCHITECTURE.md
+docs/RESEARCH_DOMAIN_AUDIT.md
+docs/FASE_*.md
+docs/JOB_SEARCH_TARGETS.md
+
+# Skill definitions — internal working process, not for public reader
+.claude/
+
+# Bloques de practica interna de fase (evidencia de ejercicios, no artifacts publicos).
+# El caso final publicable se mantiene aparte, ya limpio, en cases/ directamente.
+cases/FASE_01/BLOQUE_01_AML_RIESGO_FINANCIERO.md
+cases/FASE_01/BLOQUE_02_FINANCIAL_CRIME_TYPOLOGIES.md
+cases/FASE_01/BLOQUE_03_KYC_KYB_EDD.md
+cases/FASE_01/BLOQUE_04_SANCIONES_REGULATORIO.md
+cases/FASE_01/BLOQUE_05_INVESTIGACION_AML_OPERATIVA.md
+cases/FASE_01/BLOQUE_06_EVIDENCIA_REPORTING.md
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Virtual environment
+venv/
+env/
