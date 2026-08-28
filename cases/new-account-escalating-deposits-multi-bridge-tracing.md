@@ -5,7 +5,7 @@
 
 ## Methodology
 
-Case format follows the FinCEN SAR narrative structure (who, what, when, where, why, how) and the escalation structure typical of exchange compliance teams (frontline triage → investigation → compliance officer decision). The underlying fund-flow pattern (multi-wallet diffusion, reconsolidation, exchange cash-out) mirrors patterns described in publicly available blockchain forensics case studies. All figures, wallet counts, and identifiers below are fictional.
+Case format follows the FinCEN SAR narrative structure (who, what, when, where, why, how) and the escalation structure typical of exchange compliance teams (frontline triage → investigation → compliance officer decision). The underlying fund-flow pattern (multi-wallet diffusion, reconsolidation, exchange cash-out) mirrors patterns described in publicly available blockchain forensics case studies. All figures, wallet counts, and account and transaction identifiers below are fictional.
 
 ---
 
@@ -13,16 +13,16 @@ Case format follows the FinCEN SAR narrative structure (who, what, when, where, 
 
 **Case:** NX-2026-0819-114
 **Analyst:** Tier 1
-**Alert date/time:** 2026-08-17, 09:14 UTC
+**Alert date/time:** 2026-08-17, 09:31 UTC
 
-**Rule triggered:** TXN-VEL-003 (velocity + escalating amounts, account <10 days old).
-- 09:14 — deposit of 0.3 ETH.
-- 09:31 — deposit of 9.5 ETH → triggers TXN-VEL-003, availability hold applied automatically.
+**Rule triggered:** EXP-ACT-02 — inbound activity inconsistent with the customer profile: cumulative 24h deposit value exceeds 10x the declared monthly income recorded at onboarding ($1,800). Condition met at the 09:31 deposit (cumulative 9.8 ETH ≈ $19,600 ≈ 11x declared monthly income). Account age (9 days) and the rapid succession of deposits are recorded as aggravating factors, not as the trigger.
+- 09:14 — deposit of 0.3 ETH. Below rule conditions; no alert.
+- 09:31 — deposit of 9.5 ETH → EXP-ACT-02 condition met; alert generated, availability hold applied automatically.
 - 09:47 — deposit of 31.7 ETH, with no hold visible to the customer at the time of sending.
 
 **Initial read:** source wallet funded hours before the first deposit. Declared income at onboarding: $1,800/month (software developer). Total amount: 41.5 ETH (~$83,000-85,000).
 
-**Escalated to Tier 2:** 2026-08-17, 11:05 UTC. Reason: disproportion between declared profile and amount, staged deposit pattern, minimal account and wallet age. Outside triage scope. Hold remains active; no disclosure to customer (standard practice — not a legal bar on holding funds, but on revealing the reason for an active review).
+**Escalated to Tier 2:** 2026-08-17, 11:05 UTC. Reason: disproportion between declared profile and amount; staged, escalating deposit pattern (0.3 → 9.5 → 31.7 ETH, each roughly 3x the previous — consistent with a test transaction followed by scaled transfers); minimal account and wallet age. Outside triage scope. Hold remains active; no disclosure to customer (standard practice — not a legal bar on holding funds, but on revealing the reason for an active review).
 
 ---
 
@@ -36,7 +36,7 @@ Case format follows the FinCEN SAR narrative structure (who, what, when, where, 
 
 ### Executive summary
 
-A 9-day-old account deposited 41.5 ETH (~$83,000-85,000) across three transactions between 09:14-09:47 UTC on 08/17, against a declared income of $1,800/month. An availability hold was applied automatically at 09:31 UTC (rule TXN-VEL-003). Blockchain analytics (ref. BA-88213) traced the funds to approximately 424 individual withdrawals from a fixed-denomination privacy pool, consolidated across multiple stages via an official L1↔L2 bridge and a third-party bridge, converging into 22 addresses feeding a consolidation wallet (W2) that funded the depositing wallet (W1). Escalated to the compliance officer with a recommendation for enhanced due diligence.
+A 9-day-old account deposited 41.5 ETH (~$83,000-85,000) across three transactions between 09:14-09:47 UTC on 08/17, against a declared income of $1,800/month. An availability hold was applied automatically at 09:31 UTC (rule EXP-ACT-02). Blockchain analytics (ref. BA-88213) traced the funds to approximately 424 individual withdrawals from a fixed-denomination privacy pool, consolidated across multiple stages via an official L1↔L2 bridge and a third-party bridge, converging into 22 addresses feeding a consolidation wallet (W2) that funded the depositing wallet (W1). Escalated to the compliance officer with a recommendation for enhanced due diligence.
 
 ### Context
 
@@ -45,13 +45,16 @@ Account opened 2026-08-08. Declared at onboarding: software developer, $1,800/mo
 ### Facts
 
 - 09:14 — 0.3 ETH, W1. No alert.
-- 09:31 — 9.5 ETH, W1. Triggers TXN-VEL-003. Hold applied.
+- 09:31 — 9.5 ETH, W1. EXP-ACT-02 condition met (cumulative 9.8 ETH ≈ 11x declared monthly income). Hold applied.
 - 09:47 — 31.7 ETH, W1. Total: 41.5 ETH.
 - W1 funded hours earlier by a single transfer from W2.
 - W2: 22 distinct incoming transactions, 08/13-08/17.
 - The 22 addresses result from multi-stage consolidation of approximately 424 wallets individually funded via Tornado Cash's fixed-denomination 0.1 ETH pool (relayer-assisted, ~0.098 ETH net per withdrawal after relayer fee).
 - Route per source wallet: Tornado Cash → official L1↔L2 bridge → third-party L2→L1 bridge → consolidation into the 22 addresses.
-- Noise in W1/W2 history: zero-value entries from addresses tagged as known phishing — unrelated to the fund pattern, excluded from analysis.
+
+### Noise excluded — address poisoning
+
+W1 and W2 both show zero-value inbound transfers from phishing-tagged addresses, including one carrying the Etherscan label `Fake_Phishing1064860`. This is address poisoning: the sender pushes a zero-value or dust transfer from a look-alike address into the target's transaction history, hoping a later outbound payment is copy-pasted to the wrong destination. No value moved in either direction. Excluded from the fund-flow analysis; recognising and discarding this noise is part of the work.
 
 ### Red flags
 
