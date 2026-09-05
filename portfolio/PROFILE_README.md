@@ -15,6 +15,7 @@ Investigative work should clearly separate facts, inferences and hypotheses, whi
 
 ## Selected work
 - [New Account, Escalating Deposits: Tracing a Multi-Bridge Consolidation Pattern](https://github.com/Manuel-Rodriguez-M/Blockchain-Forensics/blob/main/cases/new-account-escalating-deposits-multi-bridge-tracing.md) — synthetic AML case study, alert to decision.
+- [The Crypto Fraud Cycle Doesn't Start at KYC](https://github.com/Manuel-Rodriguez-M/Blockchain-Forensics/blob/main/cases/crypto-fraud-cycle-doesnt-start-at-kyc.md) — fraud-typology synthesis grounded in FATF, Elliptic and Chainalysis public research.
 
 ## Projects
 - [Blockchain Forensics](https://github.com/Manuel-Rodriguez-M/Blockchain-Forensics) — public portfolio for case studies, tools and technical documentation.
