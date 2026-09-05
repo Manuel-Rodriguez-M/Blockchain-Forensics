@@ -9,28 +9,28 @@ Case format follows the FinCEN SAR narrative structure (who, what, when, where, 
 
 ---
 
-## Tier 1 — Triage Note
+## Tier 1: Triage Note
 
 **Case:** NX-2026-0819-114
 **Analyst:** Tier 1
 **Alert date/time:** 2026-08-17, 09:31 UTC
 
-**Rule triggered:** EXP-ACT-02 — inbound activity inconsistent with the customer profile: cumulative 24h deposit value exceeds 10x the declared monthly income recorded at onboarding ($1,800). Condition met at the 09:31 deposit (cumulative 9.8 ETH ≈ $19,600 ≈ 11x declared monthly income). Account age (9 days) and the rapid succession of deposits are recorded as aggravating factors, not as the trigger.
-- 09:14 — deposit of 0.3 ETH. Below rule conditions; no alert.
-- 09:31 — deposit of 9.5 ETH → EXP-ACT-02 condition met; alert generated, availability hold applied automatically.
-- 09:47 — deposit of 31.7 ETH, with no hold visible to the customer at the time of sending.
+**Rule triggered:** EXP-ACT-02, inbound activity inconsistent with the customer profile: cumulative 24h deposit value exceeds 10x the declared monthly income recorded at onboarding ($1,800). Condition met at the 09:31 deposit (cumulative 9.8 ETH ≈ $19,600 ≈ 11x declared monthly income). Account age (9 days) and the rapid succession of deposits are recorded as aggravating factors, not as the trigger.
+- 09:14: deposit of 0.3 ETH. Below rule conditions; no alert.
+- 09:31: deposit of 9.5 ETH → EXP-ACT-02 condition met; alert generated, availability hold applied automatically.
+- 09:47: deposit of 31.7 ETH, with no hold visible to the customer at the time of sending.
 
 **Initial read:** source wallet funded hours before the first deposit. Declared income at onboarding: $1,800/month (software developer). Total amount: 41.5 ETH (~$83,000-85,000).
 
-**Escalated to Tier 2:** 2026-08-17, 11:05 UTC. Reason: disproportion between declared profile and amount; staged, escalating deposit pattern (0.3 → 9.5 → 31.7 ETH, each roughly 3x the previous — consistent with a test transaction followed by scaled transfers); minimal account and wallet age. Outside triage scope. Hold remains active; no disclosure to customer (standard practice — not a legal bar on holding funds, but on revealing the reason for an active review).
+**Escalated to Tier 2:** 2026-08-17, 11:05 UTC. Reason: disproportion between declared profile and amount; staged, escalating deposit pattern (0.3 → 9.5 → 31.7 ETH, each roughly 3x the previous, consistent with a test transaction followed by scaled transfers); minimal account and wallet age. Outside triage scope. Hold remains active; no disclosure to customer. Standard practice allows funds to be held silently; disclosing the reason for an active review is what's restricted.
 
 ---
 
-## Tier 2 — Investigation Report
+## Tier 2: Investigation Report
 
 **Case:** NX-2026-0819-114 (continued)
 **Analyst:** Tier 2
-**Blockchain analytics requested:** 2026-08-17, 14:00 UTC — ref. BA-88213
+**Blockchain analytics requested:** 2026-08-17, 14:00 UTC (ref. BA-88213)
 **Received:** 2026-08-19, 09:00 UTC
 **Issued:** 2026-08-19, 10:30 UTC
 
@@ -40,19 +40,19 @@ A 9-day-old account deposited 41.5 ETH (~$83,000-85,000) across three transactio
 
 ### Context
 
-Account opened 2026-08-08. Declared at onboarding: software developer, $1,800/month. No EDD requested at onboarding — did not meet standard risk criteria at the time.
+Account opened 2026-08-08. Declared at onboarding: software developer, $1,800/month. No EDD requested at onboarding. The account did not meet standard risk criteria at the time.
 
 ### Facts
 
-- 09:14 — 0.3 ETH, W1. No alert.
-- 09:31 — 9.5 ETH, W1. EXP-ACT-02 condition met (cumulative 9.8 ETH ≈ 11x declared monthly income). Hold applied.
-- 09:47 — 31.7 ETH, W1. Total: 41.5 ETH.
+- 09:14: 0.3 ETH, W1. No alert.
+- 09:31: 9.5 ETH, W1. EXP-ACT-02 condition met (cumulative 9.8 ETH ≈ 11x declared monthly income). Hold applied.
+- 09:47: 31.7 ETH, W1. Total: 41.5 ETH.
 - W1 funded hours earlier by a single transfer from W2.
 - W2: 22 distinct incoming transactions, 08/13-08/17.
 - The 22 addresses result from multi-stage consolidation of approximately 424 wallets individually funded via Tornado Cash's fixed-denomination 0.1 ETH pool (relayer-assisted, ~0.098 ETH net per withdrawal after relayer fee).
 - Route per source wallet: Tornado Cash → official L1↔L2 bridge → third-party L2→L1 bridge → consolidation into the 22 addresses.
 
-### Noise excluded — address poisoning
+### Noise excluded: address poisoning
 
 W1 and W2 both show zero-value inbound transfers from phishing-tagged addresses, including one carrying the Etherscan label `Fake_Phishing1064860`. This is address poisoning: the sender pushes a zero-value or dust transfer from a look-alike address into the target's transaction history, hoping a later outbound payment is copy-pasted to the wrong destination. No value moved in either direction. Excluded from the fund-flow analysis; recognising and discarding this noise is part of the work.
 
@@ -61,12 +61,12 @@ W1 and W2 both show zero-value inbound transfers from phishing-tagged addresses,
 - Amount vs. declared income: ~45-50x.
 - Staged deposit pattern within a single hour.
 - ~424 fixed-denomination withdrawals rather than a single traceable source.
-- Five-stage route with distinct behavior per stage — quiet during consolidation, staged only at the final deposit.
+- Five-stage route with distinct behavior per stage: quiet during consolidation, staged only at the final deposit.
 - Origin: Tornado Cash.
 
 ### Hypothesis
 
-**Primary:** dual probing — the staged deposit pattern tests the exchange's detection threshold; the multi-stage route tests the exchange's blockchain-analytics tracing capability. Interpretation, not confirmed fact.
+**Primary:** dual probing. The staged deposit pattern tests the exchange's detection threshold; the multi-stage route tests the exchange's blockchain-analytics tracing capability. Interpretation, not confirmed fact.
 
 **Alternative:** long-term crypto holder consolidating funds moved earlier for personal privacy reasons. The scale (424 wallets) is atypical for personal use but not impossible.
 
