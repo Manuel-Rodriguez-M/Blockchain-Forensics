@@ -1,7 +1,7 @@
 # The Crypto Fraud Cycle Doesn't Start at KYC
 
 **Type:** Fraud-typology synthesis, crypto / blockchain forensics context.
-**Status:** Educational / portfolio artifact. Synthesizes public sources (FATF, Elliptic, Chainalysis, EU regulation, press reporting); not legal advice, not a description of any single company's proprietary detection system. Full source list in [sources](crypto-fraud-cycle-doesnt-start-at-kyc-sources.md).
+**Status:** Educational / portfolio artifact. Synthesizes public sources (FATF, Elliptic, Chainalysis, EU regulation, press reporting); not legal advice, not a description of any single company's proprietary detection system.
 
 ---
 
@@ -59,6 +59,17 @@ None of the three cases above would have been stopped by a single control. What 
 
 Entry, escalation, and exit call for different levels of scrutiny. Treating "verified at onboarding" as "safe forever after" is what let all three cases above happen.
 
-## Limitations
+## Sources and limitations
 
-FATF's exact indicator wording was reconstructed from cross-checked secondary sources describing its 2020 red flag report, not read from the primary document directly. Readers who need verbatim wording should consult FATF's own publication. Figures and framing originally drawn from Sumsub Academy's Fraud Prevention course were not independently re-verified here; only claims attributed to FATF, Elliptic, Chainalysis, the EU regulation, AOPP, and the three real cases were checked against outside sources. This document doesn't describe how to trace funds on-chain. That's separate, unbuilt methodology. It isn't legal advice, and doesn't assert that any named platform, bank, or individual in the cases above is at fault beyond what investigators and press reported. This is a snapshot as of September 2026. Verify before reusing a figure in anything time-sensitive.
+**Sources:**
+
+1. FATF, *Virtual Assets: Red Flag Indicators of Money Laundering and Terrorist Financing*, 14 September 2020. https://www.fatf-gafi.org/content/dam/fatf-gafi/reports/Virtual-Assets-Red-Flag-Indicators.pdf
+2. Elliptic, "What is a crypto money mule." https://www.elliptic.co/blockchain-basics/what-is-a-crypto-money-mule
+3. Chainalysis 2025 crypto theft findings, reported by The Record (Recorded Future News), "Over $3.4 billion in crypto stolen throughout 2025, with North Korea again the top culprit," corroborated by The Block, PYMNTS, and BankInfoSecurity, September 2025. https://therecord.media/over-3-billion-crypto-stolen-2025-north-korea
+4. EU Regulation 2023/1113 (Travel Rule) and EBA/GL/2024/11 Guidelines, applicable from 30 December 2024. https://service.betterregulation.com/document/749588
+5. AOPP, the Address Ownership Proof Protocol, official documentation. https://aopp.group/index.html
+6. CNBC, "Trump inaugural impersonators scammed donors out of crypto, feds say," 4 July 2025, corroborated by PYMNTS and WJLA. https://www.cnbc.com/2025/07/04/trump-cryptocurrency-ethereum-tokens.html
+7. Cointelegraph, "Scammer Steals $2.8M in Bitcoin by Posing as Police," corroborated by North Wales Pioneer and CryptoPotato, 2025. https://cointelegraph.com/news/scammer-poses-cop-steals-millions-crypto-wales-police
+8. *New Account, Escalating Deposits: Tracing a Multi-Bridge Consolidation Pattern*, this project's own published case study.
+
+**Limitations:** FATF's exact indicator wording was reconstructed from cross-checked secondary sources describing its 2020 red flag report, not read from the primary document directly. Readers who need verbatim wording should consult FATF's own publication. Figures and framing originally drawn from Sumsub Academy's Fraud Prevention course were not independently re-verified here; only claims attributed to FATF, Elliptic, Chainalysis, the EU regulation, AOPP, and the three real cases were checked against outside sources. This document doesn't describe how to trace funds on-chain. That's separate, unbuilt methodology. It isn't legal advice, and doesn't assert that any named platform, bank, or individual in the cases above is at fault beyond what investigators and press reported. This is a snapshot as of September 2026. Verify before reusing a figure in anything time-sensitive.
